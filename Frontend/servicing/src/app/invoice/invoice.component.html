@@ -1,0 +1,120 @@
+<app-header></app-header>
+    <div class="container p-5 border border-white rounded shadow-lg mt-5 bg-light">
+      <form [formGroup]=" createInvoice" (ngSubmit)="createInvoiceProcess(createInvoice.value)">
+        <div class="text-uppercase  d-flex justify-content-center pt-1 "> 
+      <h5 class="text"><b>Invoice Form</b></h5>
+        </div>
+        <div class="date d-flex justify-content-end" >
+          <div class="col-md-3">
+            <label class="d-flex justify-content-center">Service Date :  <span class="required">  * </span></label>
+            
+            <input type="date" class="form-control" aria-describedby="basic-addon1" formControlName="service_date">
+          </div>
+        </div>
+
+        <label for="customer">Select Customer:</label>
+        <span class="required">  * </span>
+        <select (change)="onSelect($event)" class="form-select  mt-3" aria-label="Default select example">
+          <option disabled selected>Customer Name</option>
+          <option *ngFor="let customer of customerData" value="{{customer._id}}">{{customer.name}}</option>
+        </select>
+        <form [formGroup]=" createStoreForm">
+        <div class="row g-3 pt-3">
+          <div class="col-md ">
+            <label>Email :</label>
+            <input type="text" class="form-control"  aria-label="Username"
+              aria-describedby="basic-addon1" formControlName="email" readonly>
+          </div>
+          <div class="col-md">
+            <label>Address :</label>
+            <input type="text" class="form-control"  aria-label="Username"
+              aria-describedby="basic-addon1" formControlName="address" readonly>
+          </div>
+          <div class="col-md">
+            <label>Phone Number :</label>
+            <input type="number" class="form-control"  aria-label="Username"
+              aria-describedby="basic-addon1" formControlName="phone" readonly>
+          </div>
+        </div>
+        </form>
+
+        <div class="service-details pt-3">
+          <label for="customer">Select Service:</label>
+        <span class="required">  * </span>
+          <ng-multiselect-dropdown [placeholder]="'Service Name'" [data]="dropdownList" [(ngModel)]="selectedItems"
+            [ngModelOptions]="{standalone: true}" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+             (onSelectAll)="onSelectAll($event)"  (onDeSelect)="onItemDeSelect($event)">
+          </ng-multiselect-dropdown>
+       
+
+          <form [formGroup]=" service">
+          <div [formGroup]=" service">
+            <div class="formService" formArrayName="items" *ngFor="let items of data.controls; let i = index;">
+              <div [formGroupName]="i" class="row g-3 pt-3">
+                <div class="col-md ">
+                  <label>Rate :</label>
+                  <input type="text" class="form-control"  aria-label="Username"
+                    aria-describedby="basic-addon1" formControlName="rate" (change)="onChangeHour(i)" readonly>
+                </div>
+                <div class="col-md">
+                  <label>Hour :</label><span class="required">  * </span>
+                  <input  type="number" class="form-control"  aria-label="Username"
+                    aria-describedby="basic-addon1" formControlName="hour" (change)="onChangeHour(i)" oninput="this.value = Math.abs(this.value)">
+                </div>
+                <div class="col-md">
+                  <label>Amount :</label>
+                  <input type="number" class="form-control"  aria-label="Username"
+                    aria-describedby="basic-addon1" formControlName="amount" (change)="onChangeHour(i)"readonly>
+                </div>
+                <div class="col-md">
+                <div class="deleteButton pt-3 d-flex justify-content-center">
+                  <button (click)="deleteServiceGroup(i)" type="button" class="btn btn-outline-danger">Remove</button>
+                </div>
+              </div>
+
+              </div>
+            </div>
+
+          </div>
+        </form>
+        </div>
+        <div class="amount-details">
+          
+            <div class="amount" *ngFor="let setting of settingData">
+              <div class="row g-3 pt-3">
+                
+                <div class="col-md">
+                  <label>Tax(%) :</label>
+                  <input   style="border-style: none" type="text" class="form-control" value="{{setting.tax}}" 
+                    aria-describedby="basic-addon1" readonly >
+                </div>
+                <div class="col-md ">
+                  <label>Tax Amount :</label>
+                  <span class="required">  * </span>
+                  <input   style="border-style: none" type="number" class="form-control"  
+                    aria-describedby="basic-addon1" formControlName="tax_amount"  readonly>
+                </div>
+                <div class="col-md ">
+                  <label>Total Amount :</label>
+                  <span class="required">  * </span>
+                  <input  style="border-style: none" type="number" class="form-control"  
+                    aria-describedby="basic-addon1" formControlName="total_amount" readonly>
+                </div>
+              </div>
+            </div>
+         
+        </div>
+        <div class="mt-3 d-flex justify-content-center">
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
+      </div>
+      </form>
+      <div *ngIf="successMessage" class="alert alert-success mt-3">
+        {{ successMessage }}
+      </div>
+    </div>
+
+    <div *ngIf="showPopup" class="popup">
+  <h2>Attention</h2>
+  <p>Mandatory fields are required!</p>
+  <button (click)="closePopup()">OK</button>
+</div>

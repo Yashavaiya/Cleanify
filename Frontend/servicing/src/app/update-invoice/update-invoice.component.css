@@ -1,0 +1,13 @@
+.form-control {
+    background-color: #EEF5FF;
+
+  }
+
+
+
+:host ::ng-deep .formService input[formControlName="hour"] {
+    background-color: white; 
+  }
+  
+
+  

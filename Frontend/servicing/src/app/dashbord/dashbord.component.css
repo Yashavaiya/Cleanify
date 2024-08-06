@@ -1,0 +1,20 @@
+.slide-in {
+    animation: slideIn 1s ease-out; 
+  }
+  
+  @keyframes slideIn {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+ 
+
+  #carouselExampleControls{
+    width: auto;
+    height: 614px;
+    color: black;
+   
+  }

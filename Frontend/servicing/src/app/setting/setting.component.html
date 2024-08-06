@@ -1,0 +1,45 @@
+
+  <app-header></app-header>
+  <div class="container p-5 border border-white rounded shadow-lg mt-5">
+    <form [formGroup]="UpdateSettingFormGroup" (ngSubmit)="collection()">
+      <div class="text-uppercase  d-flex justify-content-center pt-1 ">
+        <p class=""><b>Setting Form </b></p>
+      </div>
+      <div class="row g-2 pt-3">
+        <div class="col-md ">
+          <label>User Email: :</label>
+          <input type="email" class="form-control" placeholder="Username" aria-label="Username"
+            aria-describedby="basic-addon1" formControlName="user_email">
+        </div>
+      </div>
+
+      <div class="row g-2 pt-3">
+        <div class="col-md">
+          <label>Password : </label>
+          <input type="password" class="form-control" aria-describedby="emailHelp" placeholder="Enter Phone"
+            formControlName="password">
+        </div>
+        <div class="col-md ">
+          <label>host Name :</label>
+          <input type="text" class="form-control-file" id="exampleFormControlFile1" formControlName="host_name">
+        </div>    
+
+      </div>
+      <div class="row g-2 pt-3">
+        <div class="col-md">
+          <label>Tax : </label>
+          <input type="number" class="form-control" aria-describedby="emailHelp" placeholder="Enter Phone"
+            formControlName="tax">
+        </div>
+        <div class="col-md ">
+          <label>Port :</label>
+          <input type="number" class="form-control-file" id="exampleFormControlFile1" formControlName="port">
+        </div>  
+        
+      </div>
+      <div class="button-1  d-flex justify-content-center p-5 ">
+        <button type="submit" class="btn btn-outline-primary">Update</button>
+      </div>
+    </form>
+  </div>
+

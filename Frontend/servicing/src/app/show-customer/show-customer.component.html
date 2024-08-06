@@ -1,0 +1,110 @@
+<app-header></app-header>
+  <nav class="navbar navbar-light bg-light mt-3">
+    <div class="container-fluid">
+      <a class="navbar-brand">Customer Details</a>
+      <form class="d-flex">
+        <input [(ngModel)]="searchKey"  class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [ngModelOptions]="{standalone: true}">
+        <i  (click)="searchCustomers()" class="fa-solid fa-magnifying-glass pt-2" style="font-size: 24px; width: 24px; height: 24px;"></i>
+      </form>
+    </div>
+  </nav>
+
+  <table class="table  custom-table mt-3">
+   <thead>
+  <tr>
+    <th scope="col">Actions</th>
+    <th scope="col" (click)="onSortClick('name')">Customer Name 
+      <i class="fa" [ngClass]="getSortIcon('name')"></i>
+    </th>
+    <th scope="col" (click)="onSortClick('email')">Email 
+      <i class="fa" [ngClass]="getSortIcon('email')"></i>
+    </th>
+    <th scope="col">Phone</th>
+    <th scope="col" (click)="onSortClick('address')">Address 
+      <i class="fa" [ngClass]="getSortIcon('address')"></i>
+    </th>
+    <th scope="col">Photo</th>
+  </tr>
+</thead>
+
+    <tbody>
+      <ng-container *ngIf="getCurrentPageData().length > 0; else noDataTemplate">
+        <tr *ngFor="let customer of getCurrentPageData()" class="custom-table-row">
+          <td>
+            <div class="btn-group pt-1" role="group" aria-label="Basic example">
+              <i (click)="deleteCustomerProcess(customer._id)" class="fa fa-trash " data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+            </div>
+            &nbsp;&nbsp;
+            <div class="btn-group pt-1">
+              <a routerLink="/update/{{customer._id}}">
+                <i class="fa fa-pencil"></i> 
+              </a>
+            </div>&nbsp;&nbsp;
+            <div class="btn-group pt-1">
+              <a routerLink="/viewCustomerDetails/{{customer._id}}">
+                <i class="fa fa-eye"></i></a>
+            </div>
+          </td>
+          <td>{{customer.name}} </td>
+          <td>{{customer.email}} </td>
+          <td>{{customer.phone}} </td>
+          <td class="limited-width"> {{customer.address}} </td>
+          <td> <img src="http://localhost:3000/cleanService/customer/GetPhoto/{{ customer.photo }}" alt="Preview" style="max-width: 100px; max-height: 100px;"></td>   
+     </tr>
+      </ng-container>
+      <ng-template #noDataTemplate>
+        <tr>
+          <td style="font-size: x-large;" colspan="6" class="text-center">No data found</td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
+  
+
+
+  <div class="text-center ">
+    <div class="pagination-1">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+  
+      <li class="page-item" *ngFor="let page of totalPages()" [class.active]="page === currentPage">
+        <a class="page-link" (click)="changePage(page)">{{ page }}</a>
+      </li>
+  
+      <li class="page-item" [class.disabled]="currentPage === totalPages().length">
+        <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+    <p>Records {{ getCurrentPageData().length }} of {{ itemsPerPage }}</p>
+    <p>Total Records on this Page: {{ getCurrentPageData().length }}</p>
+  </div>
+  
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+        
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete this customer?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()" data-bs-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

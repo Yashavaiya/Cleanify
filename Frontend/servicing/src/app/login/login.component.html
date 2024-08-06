@@ -1,0 +1,85 @@
+ <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f8f9fa; 
+    }
+
+    .login {
+      width: 500px; 
+      margin: auto; 
+    }
+
+  </style>
+
+
+<body>
+
+  <div class="login">
+    <div class="container p-5 border rounded shadow-lg  bg-light">
+      <form [formGroup]="loginFormGroup" (ngSubmit)="loginProcess(loginFormGroup.value)">
+        <div class="text-uppercase text-center">
+          <h5 class="text"><b>Login</b></h5>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email ID:</label>
+          <span class="required text-danger">*</span>
+          <input [maxLength]="50" type="email" placeholder="Enter Email" class="form-control" id="email" formControlName="email">
+          <div class="pt-2" *ngIf="isFieldInvalid('email') && (loginFormGroup.get('email').dirty || loginFormGroup.get('email').touched)">
+            <div class="alert alert-danger" role="alert" *ngIf="loginFormGroup.get('email').hasError('required')">
+              Email is required.
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="loginFormGroup.get('email').hasError('email')">
+              Please enter a valid email address.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password:</label>
+          <span class="required text-danger">*</span>
+          <div class="input-group">
+            <input [maxLength]="20" placeholder="Enter Password" type="{{ hidePassword ? 'password' : 'text' }}" class="form-control" id="password" formControlName="password">
+            <button class="btn btn-outline-success" type="button" (click)="togglePasswordVisibility()">
+              <i class="{{ hidePassword ? 'bi bi-eye' : 'bi bi-eye-slash' }}"></i>
+            </button>
+          </div>
+          <div class="pt-2" *ngIf="isFieldInvalid('password') && (loginFormGroup.get('password').dirty || loginFormGroup.get('password').touched)">
+            <div class="alert alert-danger" role="alert" *ngIf="loginFormGroup.get('password').hasError('required')">
+              Password is required.
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="loginFormGroup.get('password').hasError('minlength')">
+              Password must be at least 6 characters long.
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="loginFormGroup.hasError('invalidPassword')">
+              Invalid password.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group text-center">
+          <a routerLink="/ForgetPassword" class="ForgetPwd ">Forgot Password?</a>
+        </div>
+
+        <div *ngIf="showSubmitMessage && errorMessage" class="error-message alert alert-danger mt-3">
+          {{ errorMessage }}
+        </div>
+
+        <div *ngIf="successMessage" class="alert alert-success mt-3">
+          {{ successMessage }}
+        </div>
+
+        <div class="d-flex justify-content-center mt-3">
+          <button type="submit" class="btn btn-outline-success">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+
+

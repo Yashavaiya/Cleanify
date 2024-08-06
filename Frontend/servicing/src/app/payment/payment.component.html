@@ -1,0 +1,24 @@
+
+<div class="container mt-5">
+  <div *ngIf="invoiceId" class="card">
+    <div class="card-body">
+      <h5 class="text"><b>Image Upload</b></h5>
+      <form>
+        <div class="form-group">
+          <label  for="fileInput" class="form-label">Select File:</label>
+          <span class="required"> * </span>
+          <input  (change)="onFileSelected($event)"  class="form-control" type="file" id="formFile">
+        </div>
+        <div class="pt-3">
+        <button type="button" class="btn btn-primary" (click)="uploadPayment()">Upload Image</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div *ngIf="isUploadSuccess" class="alert alert-success mt-3" role="alert">
+  Image uploaded successfully!
+</div>
+<div *ngIf="successMessage" class="alert alert-danger mt-3">
+  {{ successMessage }}
+</div>

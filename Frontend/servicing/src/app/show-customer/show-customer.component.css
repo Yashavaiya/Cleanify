@@ -1,0 +1,61 @@
+
+  .limited-width {
+    max-width: 100px;
+    white-space: normal; 
+    text-overflow: ellipsis;
+  }
+
+  .custom-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .custom-table th,
+  .custom-table td {
+    padding: 10px;
+  }
+  
+  .custom-table thead th {
+    background-color: #f0f0f0;  
+  }
+  
+  .custom-table tr.custom-table-row:hover {
+    background-color: #e0e0e0; 
+  }
+  
+  .custom-table td {
+    border: 1px solid #ddd; 
+  }
+  
+  .custom-table td img {
+    display: block;
+    margin: auto;
+  }
+  
+  .limited-width {
+    max-width: 200px; 
+  }
+  
+.custom-table th {
+  text-align: center; 
+  padding: 10px; 
+  width: calc(100% / 6); 
+  
+}
+
+
+
+.custom-table th i {
+  margin-left: 5px; 
+}
+.custom-table td {
+  text-align: center; 
+  vertical-align: middle; 
+  padding: 10px; 
+}
+
+
+
+.btn-group i {
+  color: #0A1D56;
+}

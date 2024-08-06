@@ -1,0 +1,49 @@
+<app-header></app-header>
+<div class="container p-5 border rounded shadow-lg mt-5 bg-light">
+  <form [formGroup]="UpdateSettingFormGroup" (ngSubmit)="collection()">
+    <div class="text-uppercase text-center">
+      <h5 class="text"><b>Setting Form</b></h5>
+    </div>
+    <div class="row g-2 pt-3">
+      <div class="col-md">
+        <label>User Email:</label>
+        <input type="email" class="form-control" placeholder="Enter User Email" formControlName="user_email">
+      </div>
+    </div>
+
+    <div class="row g-2 pt-3">
+      <div class="col-md">
+        <label>Password:</label>
+        <div class="input-group">
+          <input type="{{ hidePassword ? 'password' : 'text' }}" class="form-control" placeholder="Enter Password" formControlName="password">
+          <button class="btn btn-outline-primary" type="button" (click)="togglePasswordVisibility()">
+            <i class="{{ hidePassword ? 'bi bi-eye' : 'bi bi-eye-slash' }}"></i>
+          </button>
+        </div>
+      </div>
+      <div class="col-md">
+        <label>Host Name:</label>
+        <input type="text" class="form-control" placeholder="Enter Host Name" formControlName="host_name">
+      </div>
+    </div>
+
+    <div class="row g-2 pt-3">
+      <div class="col-md">
+        <label>Tax:</label>
+        <input type="number" class="form-control" placeholder="Enter Tax" formControlName="tax">
+      </div>
+      <div class="col-md">
+        <label>Port:</label>
+        <input type="number" class="form-control" placeholder="Enter Port" formControlName="port">
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center pt-4">
+      <button type="submit" class="btn btn-outline-primary">Update</button>
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success mt-3">
+      {{ successMessage }}
+    </div>
+  </form>
+</div>

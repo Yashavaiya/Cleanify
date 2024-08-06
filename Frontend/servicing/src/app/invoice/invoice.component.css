@@ -1,0 +1,46 @@
+.required{
+    color: red;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #5c68ea; /* Green color, you can change it to your preference */
+    color: #fff; /* Text color */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .popup h2 {
+    color: #fff; /* Header text color */
+  }
+  
+  .popup p {
+    margin-bottom: 15px;
+  }
+  
+  .popup button {
+    background-color: #fff; /* Button background color */
+    color: #5c68ea; /* Button text color */
+    padding: 8px 16px;
+    border: 1px solid #5c68ea;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  

@@ -1,0 +1,14 @@
+.ForgetPwd{
+text-decoration: none;
+color: black;
+}
+
+.required{
+    color: red;
+}
+.login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

@@ -1,0 +1,47 @@
+   <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f8f9fa; 
+    }
+
+    .verification {
+      width: 500px; 
+      margin: auto; 
+    }
+
+  </style>
+
+<body>
+  
+
+  <div class="verification">
+  <div class="container p-5 border border-white rounded shadow-lg  ">
+     <form id="otpForm" [formGroup]=" verificationFormGroup" (ngSubmit)="resetPasswordProcess(verificationFormGroup.value)" >
+            <div class="text-uppercase  d-flex justify-content-center pt-1 ">
+                <p class=""><b>Forget Password </b></p>
+                
+              </div>
+            <div class="mb-3  " >
+              <label  for="exampleInputEmail1" class="form-label">Enter the OTP : </label>
+              <span class="required"> * </span>
+              <input [maxLength]="20" type="String" placeholder="Enter OTP" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="resetString" >
+             
+            </div>
+            <div *ngIf="showSubmitMessage && errorMessage" class="error-message alert alert-danger ">
+              {{ errorMessage }}
+            </div>
+            <div *ngIf="successMessage" class="alert alert-success">
+              {{ successMessage }}
+            </div>
+            <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-outline-success ">Submit</button>
+        </div>
+          </form>
+          
+    </div>
+  </div>
+</body>

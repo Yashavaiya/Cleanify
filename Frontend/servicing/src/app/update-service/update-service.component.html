@@ -1,0 +1,70 @@
+<app-header></app-header>
+    <form [formGroup]=" UpdateServiceFormGroup" (ngSubmit)="collection()"  >
+    <div class="container p-5 border border-white rounded shadow-lg mt-5 bg-light">
+    <div class="text-uppercase  d-flex justify-content-center pt-1 ">
+      
+      <h5 class="text"><b>Service Form</b></h5>
+    </div>
+    <div class="row g-2 pt-3">
+      <div class="col-md">
+        <label >Name : </label>
+        <input [maxLength]="100" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name"formControlName="name">
+        <div class="pt-3"
+        *ngIf="isFieldInvalid('name') && (UpdateServiceFormGroup.get('name').dirty || UpdateServiceFormGroup.get('name').touched)">
+        <div class="alert alert-danger " role="alert" *ngIf="UpdateServiceFormGroup.get('name').hasError('required')">
+          Name is required.
+        </div>
+        <div class="alert alert-danger " role="alert" *ngIf="UpdateServiceFormGroup.get('name').hasError('pattern')">
+          Only letters and spaces are allowed (no numbers).
+        </div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="row g-2 pt-3">
+      <div class="col-md">
+        <label>Image : </label>
+        <input type="file" (change)="onFileChange($event)"   class="form-control" aria-describedby="emailHelp">
+        <span *ngIf="service" >
+          <p class="pt-2"> Selected Photo:{{service.services_img}}</p>
+        </span>
+      </div>
+      
+      <div class="col-md">
+        <label >Rate: </label>
+        <input [maxLength]="10" type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Rate"  formControlName="rate">
+        <div class="pt-3"
+        *ngIf="isFieldInvalid('rate') && (UpdateServiceFormGroup.get('rate').dirty || UpdateServiceFormGroup.get('rate').touched)">
+        <div class="alert alert-danger " role="alert" *ngIf="UpdateServiceFormGroup.get('rate').hasError('required')">
+          Rate is required.
+        </div>
+        <div class="alert alert-danger " role="alert" *ngIf="UpdateServiceFormGroup.get('rate').hasError('pattern')">
+          Only numbers are allowed.
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="row g-2 pt-3">
+    <div class="col-md">
+      <label  for="exampleFormControlTextarea1">Description : </label>
+      <textarea [maxLength]="500" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Description"  formControlName="description"></textarea>
+      <div class="pt-3"
+      *ngIf="isFieldInvalid('description') && (UpdateServiceFormGroup.get('description').dirty || UpdateServiceFormGroup.get('description').touched)">
+      <div class="alert alert-danger " role="alert" *ngIf="UpdateServiceFormGroup.get('description').hasError('required')">
+        Description is required.
+      </div>
+    </div>
+    </div>
+  </div>
+    <div class="button-1  d-flex justify-content-center p-5 ">
+        <button type="submit" class="btn btn-outline-primary">Update</button>
+      </div>
+      <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+      </div>
+    </div>
+   
+  </form>
+    
+
+    
